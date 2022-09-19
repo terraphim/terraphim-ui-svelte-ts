@@ -1,20 +1,46 @@
-<!-- src/lib/components/ThemeSwitch.svelte -->
 <script lang="ts">
+  import { invoke } from "@tauri-apps/api/tauri";
+  import { theme,role, is_tauri} from './stores';
+  let configStore=[]; 
+  export function loadConfig(){
+          
+      try {
+          if (window.__TAURI__) {
+              is_tauri.set(true);
+              invoke("get_config").then((res) => {
+              configStore=(JSON.parse(res));
+              role.set(Object.keys(configStore)[0]); 
+          
+              }).catch((e) => console.error(e));
+          } else {
+          fetch('http://127.0.0.1:8000/config')
+          .then(response => response.json())
+          .then(data => {
+              configStore=data.roles;
+              role.set(Object.keys(configStore)[0]);
+              console.log("Role", $role);
+              console.log("Value", configStore[$role]["theme"]);
+              theme.set(configStore[$role]["theme"]);
+              console.log(Object.keys(configStore));
+              console.log(configStore);
+              console.log(typeof(configStore));
+          }).catch((e) => console.error(e));
+      }
+  
+      } catch (error) {
+          console.error(error);
+      }
+      return configStore;
+  }
+
+
     import { Field,Select } from 'svelma';
-    import { theme,role} from './stores';
     import { Button } from 'svelma';
-    import { invoke } from "@tauri-apps/api/tauri";
+    
 
-export let configStore=[];
+configStore=loadConfig();
 
-invoke("get_config").then((res) => {
-                    configStore=(JSON.parse(res));
-                    role.set(Object.keys(configStore)[0]); 
-                    
-                  }
-                    )
-                    .catch((e) => console.error(e));
-
+console.log("test ",configStore.length);
 let themes ="";
 //  FIXME: DO the for loop for theme
 // $: if (role === configStore[0].name) {

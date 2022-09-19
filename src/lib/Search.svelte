@@ -2,18 +2,18 @@
     import { Button, Field, Input } from 'svelma';
     import { invoke } from '@tauri-apps/api/tauri';
     import logo from '/src/assets/terraphim_gray.png';
-    import { role } from './stores';
+    import { role,is_tauri } from './stores';
     let result: string = '';
     let input: string = "test";
 
     
     function handleClick() {
-    invoke("search", {
-      needle: input,
-      role: $role,
-    })
-      .then(onMessage)
-      .catch(onMessage);
+      if($is_tauri){
+        invoke("search", {
+        needle: input,
+        role: $role,
+      })
+    }
   }
     
 //  (res) => {

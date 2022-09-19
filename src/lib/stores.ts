@@ -3,4 +3,5 @@ import { invoke } from '@tauri-apps/api/tauri';
 
 const theme = writable('spacelab')
 const role = writable('selected');
-export { theme, role };
+const is_tauri=writable(false);
+export { theme, role , is_tauri};
