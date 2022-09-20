@@ -59,6 +59,4 @@ $: if (themes) {
       {/each}
 </Select>
 </Field>
-Selected Role {$role} 
-Selection {themes}
-Theme {$theme}
+
