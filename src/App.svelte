@@ -5,13 +5,13 @@
   import Communication from "./lib/Communication.svelte";
   import Cli from './lib/Cli.svelte';
   import '@fortawesome/fontawesome-free/css/all.css';
-  import Search from './lib/Search.svelte';
+  import Search from './lib/Search/Search.svelte';
   import ThemeSwitcher from './lib/ThemeSwitcher.svelte';
   import { theme }from './lib/stores';
   import configStore from './lib/ThemeSwitcher.svelte';
-  
 
-  
+
+
 
   const views = [
     {
@@ -26,7 +26,7 @@
       label: "Messages",
       component: Communication,
     },
-    
+
 ];
 
 let selected = views[0];
@@ -34,7 +34,7 @@ let responses = writable([]);
 function select(view) {
     selected = view;
   }
- 
+
 
 
 function onMessage(value) {
@@ -54,11 +54,11 @@ function clear() {
 <svelte:head>
     <meta name="color-scheme" content={$theme == 'spacelab' ? 'lumen darkly' :
     $theme} /> <link rel="stylesheet" href={`/src/assets/bulmaswatch/${$theme}/bulmaswatch.min.css`} />
-    
+
 </svelte:head>
 
 <main>
-  
+
 
 
   <ThemeSwitcher />
@@ -69,7 +69,7 @@ function clear() {
     {#if Array.isArray(configStore)}
       {#each configStore as item}
     <li>{item.name} {item.theme}</li>
-      
+
       {/each}
     {/if}
   </ul>
