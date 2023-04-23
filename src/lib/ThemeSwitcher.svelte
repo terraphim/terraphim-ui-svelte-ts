@@ -1,6 +1,6 @@
 <script lang="ts">
   import { invoke } from '@tauri-apps/api/tauri';
-  import { theme, role, is_tauri } from './stores';
+  import { theme, role, is_tauri,serverUrl } from './stores';
   import { Field, Select } from 'svelma';
   import { CONFIG } from '../config';
 
@@ -24,6 +24,11 @@
             console.log('Role', $role);
             console.log('Value', configStore[$role]['theme']);
             theme.set(configStore[$role]['theme']);
+            if (configStore[$role]['serverURL'] !== undefined) {
+              serverUrl.set(configStore[$role]['serverURL']);
+            }else{
+              serverUrl.set(`${CONFIG.ServerURL}/search`);
+            }
             console.log(Object.keys(configStore));
             console.log(configStore);
             console.log(typeof configStore);
@@ -37,13 +42,8 @@
   }
 
   configStore = loadConfig();
-
   console.log('test ', configStore.length);
   let themes = '';
-  //  FIXME: DO the for loop for theme
-  // $: if (role === configStore[0].name) {
-  //     themes = configStore[0].theme;
-  // }
   $: if (themes) {
     role.set(themes);
     theme.set(configStore[themes].theme);

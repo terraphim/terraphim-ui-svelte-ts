@@ -2,11 +2,10 @@
   import { Field, Input } from 'svelma';
   import { invoke } from '@tauri-apps/api/tauri';
   import logo from '/src/assets/terraphim_gray.png';
-  import { role, is_tauri, input } from '../stores';
+  import { role, is_tauri, input, serverUrl} from '../stores';
   import type { SearchResult } from './SearchResult';
   import ResultItem from './ResultItem.svelte';
   import { CONFIG } from '../../config';
-
   let result: SearchResult[] = [];
 
   function handleClick() {
@@ -17,6 +16,12 @@
       });
     } else {
       console.log(input);
+      console.log("Role config");
+      console.log($role);
+      console.log($serverUrl);
+      //   if (obj.last !== undefined) {
+      //  console.log(obj.last.toUpperCase());
+      // }
       fetch(`${CONFIG.ServerURL}/search`, {
         method: 'POST',
         headers: {
