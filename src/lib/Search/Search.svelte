@@ -7,7 +7,8 @@
   import ResultItem from './ResultItem.svelte';
   import { CONFIG } from '../../config';
   let result: SearchResult[] = [];
-
+  
+  let currentSearchUrl;
   function handleClick() {
     if ($is_tauri) {
       invoke('search', {
@@ -15,14 +16,12 @@
         role: $role,
       });
     } else {
-      console.log(input);
+      console.log($input);
       console.log("Role config");
       console.log($role);
-      console.log($serverUrl);
-      //   if (obj.last !== undefined) {
-      //  console.log(obj.last.toUpperCase());
-      // }
-      fetch(`${CONFIG.ServerURL}/search`, {
+      console.log('The current value is: ',$serverUrl);
+  
+      fetch($serverUrl, {
         method: 'POST',
         headers: {
           accept: 'application/json',
@@ -32,6 +31,7 @@
           search: $input,
           skip: 0,
           limit: 10,
+          role: $role
         }),
       })
         .then(response => response.json())
