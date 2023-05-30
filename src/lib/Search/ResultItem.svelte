@@ -18,9 +18,11 @@
       <div class="content">
         <div class="level-right">
           <Taglist>
-            <Tag rounded>{item.pk}</Tag>
-            <Tag>Tag1</Tag>
-            <Tag type="is-info">Tag2</Tag>
+            {#if item.tags}
+            {#each Object.entries(item.tags) as [tag, url]}
+            <a href="{url}"><Tag rounded>{tag}</Tag></a>
+            {/each}
+            {/if}
           </Taglist>
         </div>
         <div transition:fade>
@@ -29,7 +31,7 @@
               {item.title}
             </h2>
           </button>
-          <small>Description</small>
+          <small>Description: {item.description}</small>
           <small />
           <br />
         </div>

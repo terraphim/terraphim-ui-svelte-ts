@@ -41,11 +41,11 @@
   let themes = '';
   $: if (themes) {
     role.set(themes);
-    theme.set(configStore[themes].theme);
-    console.log(configStore[themes].theme);
-    console.log("Mess");
+    if (configStore[themes]!== undefined){
+    console.log("Setting up theme and url from config");
     console.log(configStore[themes]);
     console.log(configStore[themes].serverUrl);
+    theme.set(configStore[themes].theme);
     if (configStore[themes].serverUrl !== undefined) {
               console.log("Setting URL");
               console.log(configStore[themes].serverUrl);
@@ -55,7 +55,17 @@
               serverUrl.set(`${CONFIG.ServerURL}/search`);
               console.log("Fallback to default");
             }
-  }
+  } else{
+      console.log(configStore);
+      console.log("Setting up default theme to spacelab");
+      theme.set('spacelab');
+      serverUrl.set(`${CONFIG.ServerURL}/search`);
+      console.log(configStore);
+    }
+}
+      
+
+
 </script>
 
 <Field grouped position="is-right">

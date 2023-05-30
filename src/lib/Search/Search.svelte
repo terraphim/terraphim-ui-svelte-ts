@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Field, Input } from 'svelma';
   import { invoke } from '@tauri-apps/api/tauri';
-  import logo from '/src/assets/terraphim_gray.png';
+  import logo from '/public/assets/terraphim_gray.png';
   import { role, is_tauri, input, serverUrl} from '../stores';
   import type { SearchResult } from './SearchResult';
   import ResultItem from './ResultItem.svelte';
@@ -62,8 +62,7 @@
     on:keyup={e => e.key === 'Enter' && handleClick()}
   />
 </Field>
-
-{#if result.length !== 0}
+{#if result !== null && result.length !== 0}
   {#each result as result_item}
     <ResultItem item={result_item} />
   {/each}

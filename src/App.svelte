@@ -1,5 +1,5 @@
 <script lang="ts">
-  import logo from './assets/terraphim_gray.png'
+  import logo from '/public/assets/terraphim_gray.png'
   import { writable } from "svelte/store";
   import Shortcuts from "./lib/Shortcuts.svelte";
   import Communication from "./lib/Communication.svelte";
@@ -53,7 +53,7 @@ function clear() {
 </script>
 <svelte:head>
     <meta name="color-scheme" content={$theme == 'spacelab' ? 'lumen darkly' :
-    $theme} /> <link rel="stylesheet" href={`/src/assets/bulmaswatch/${$theme}/bulmaswatch.min.css`} />
+    $theme} /> <link rel="stylesheet" href={`./assets/bulmaswatch/${$theme}/bulmaswatch.min.css`} />
 
 </svelte:head>
 
