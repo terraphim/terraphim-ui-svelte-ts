@@ -1,3 +1,3 @@
 export const CONFIG = {
-  ServerURL: 'http://localhost:8000',
+  ServerURL: location.protocol + '//'+window.location.host || '/',
 };

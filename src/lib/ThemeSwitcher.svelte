@@ -38,6 +38,7 @@
 
   configStore = loadConfig();
   console.log('test ', configStore.length);
+  console.log('test CONFIG.ServerURL ', CONFIG.ServerURL);
   let themes = '';
   $: if (themes) {
     role.set(themes);
