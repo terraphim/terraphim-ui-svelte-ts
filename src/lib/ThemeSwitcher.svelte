@@ -3,8 +3,7 @@
   import { theme, role, is_tauri, serverUrl } from './stores';
   import { Field, Select } from 'svelma';
   import { CONFIG } from '../config';
-
-  let configStore = [];
+  let configStore =[];
   export function loadConfig() {
     try {
       if (window.__TAURI__) {
@@ -65,7 +64,6 @@
     }
 }
       
-
 
 </script>
 

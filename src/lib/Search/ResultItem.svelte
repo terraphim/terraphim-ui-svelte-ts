@@ -3,13 +3,28 @@
   import { fade } from 'svelte/transition';
   import ArticleModal from './ArticleModal.svelte';
   import type { SearchResult } from './SearchResult';
-
+  import configStore from '../ThemeSwitcher.svelte';
+  import { role, is_tauri, serverUrl } from '../stores';
   export let item: SearchResult;
   let showModal = false;
 
   const onTitleClick = () => {
     showModal = true;
   };
+  
+  if (configStore[$role]!== undefined){
+    console.log("Have attribute",configStore[$role]);
+    if (configStore[$role].hasOwnProperty('enableLogseq')) {
+      // The attribute exists
+      // Do something here
+      console.log("enable logseq True");
+    } else {
+      // The attribute does not exist
+      // Do something else here
+    }
+  }{
+    console.log("Didn't make it");
+  }
 </script>
 
 <div class="box">
@@ -20,7 +35,7 @@
           <Taglist>
             {#if item.tags}
             {#each Object.entries(item.tags) as [tag, url]}
-            <a href="{url}"><Tag rounded>{tag}</Tag></a>
+            <a href="https://terraphim.github.io/terraphim-project/#/page/{tag}" target="_blank"><Tag rounded>{tag}</Tag></a>
             {/each}
             {/if}
           </Taglist>
