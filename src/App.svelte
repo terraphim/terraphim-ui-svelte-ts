@@ -1,79 +1,45 @@
 <script lang="ts">
-  import logo from '/public/assets/terraphim_gray.png'
-  import { writable } from "svelte/store";
-  import Shortcuts from "./lib/Shortcuts.svelte";
-  import Communication from "./lib/Communication.svelte";
-  import Cli from './lib/Cli.svelte';
+  import logo from '/public/assets/terraphim_gray.png';
+  import { writable } from 'svelte/store';
+  import Shortcuts from './lib/Shortcuts.svelte';
   import '@fortawesome/fontawesome-free/css/all.css';
   import Search from './lib/Search/Search.svelte';
   import ThemeSwitcher from './lib/ThemeSwitcher.svelte';
-  import { theme }from './lib/stores';
+  import { theme } from './lib/stores';
   import configStore from './lib/ThemeSwitcher.svelte';
-
-
-
-
-  const views = [
-    {
-      label: "CLI",
-      component: Cli,
-    },
-    {
-      label: "Shortcuts",
-      component: Shortcuts,
-    },
-    {
-      label: "Messages",
-      component: Communication,
-    },
-
-];
-
-let selected = views[0];
-let responses = writable([]);
-function select(view) {
-    selected = view;
-  }
-
-
-
-function onMessage(value) {
-    responses.update(r => [{ text: `[${new Date().toLocaleTimeString()}]` + ': ' + (typeof value === "string" ? value : JSON.stringify(value)) }, ...r])
-  }
-
-// this function is renders HTML without sanitizing it so it's insecure
-  // we only use it with our own input data
-  function insecureRenderHtml(html) {
-    responses.update(r => [{ html }, ...r])
-  }
-
-function clear() {
-  responses.update(() => []);
-}
+  import { Route, router, active } from 'tinro';
+  import FetchTabs from './lib/Fetchers/FetchTabs.svelte';
 </script>
-<svelte:head>
-    <meta name="color-scheme" content={$theme == 'spacelab' ? 'lumen darkly' :
-    $theme} /> <link rel="stylesheet" href={`./assets/bulmaswatch/${$theme}/bulmaswatch.min.css`} />
 
+<svelte:head>
+  <meta
+    name="color-scheme"
+    content={$theme == 'spacelab' ? 'lumen darkly' : $theme}
+  />
+  <link
+    rel="stylesheet"
+    href={`./assets/bulmaswatch/${$theme}/bulmaswatch.min.css`}
+  />
 </svelte:head>
 
 <main>
-
-
-
   <ThemeSwitcher />
   <Search />
 
-  <br/>
+  <br />
   <ul>
     {#if Array.isArray(configStore)}
       {#each configStore as item}
-    <li>{item.name} {item.theme}</li>
-
+        <li>{item.name} {item.theme}</li>
       {/each}
     {/if}
   </ul>
+  <!-- <nav class="navbar ">
 
+    <a class="navbar-item " href="/" use:active exact>Home</a>
+    <a class="navbar-item " href="/fetch" use:active>Fetchers</a>
+  </nav> -->
+  <Route path="/fetch"><FetchTabs /></Route>
 </main>
 
 <style>
@@ -87,5 +53,4 @@ function clear() {
     padding: 1em;
     margin: 0 auto;
   }
-
 </style>

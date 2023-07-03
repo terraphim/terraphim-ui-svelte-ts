@@ -608,6 +608,18 @@ color-support@^1.1.2:
   resolved "https://registry.npmjs.org/color-support/-/color-support-1.1.3.tgz"
   integrity sha512-qiBjkpbMLO/HL68y+lh4q0/O1MZFj2RX6X/KmMa3+gJD3z+WwI1ZzDHysvqHGS3mP6mznPckpXmw1nI9cJjyRg==
 
+comlink-fetch@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/comlink-fetch/-/comlink-fetch-0.1.2.tgz#d5cb49a0b18ea3e77ec24922676b78b35bd2450d"
+  integrity sha512-Unt2BIOsDH9onBRYJAyzxGTqxvbPF1rXU69t6p0Tlhf2yfsRW4aSmEIdc5ajn1fZSIfzdYnEC8yKCEbriPs2rg==
+  dependencies:
+    comlinkjs "^2.3.1"
+
+comlinkjs@^2.3.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/comlinkjs/-/comlinkjs-2.4.1.tgz#db4d40edd477f8eef9a8a1b460844f41f5a6dcdb"
+  integrity sha512-nifSjuwsqqNg2vq1vcFuKhqclFUA1R0Fal0vjE/TDXqOlaG4h9XRe2MRe2Wy+5aHVzqK/pI+03U327j2hFn1Zg==
+
 concat-map@0.0.1:
   version "0.0.1"
   resolved "https://registry.npmjs.org/concat-map/-/concat-map-0.0.1.tgz"
@@ -2033,6 +2045,11 @@ tar@^6.1.11:
     minizlib "^2.1.1"
     mkdirp "^1.0.3"
     yallist "^4.0.0"
+
+tinro@^0.6.12:
+  version "0.6.12"
+  resolved "https://registry.yarnpkg.com/tinro/-/tinro-0.6.12.tgz#f07c7212720d1b8e4bce6b22c1e65b0aabe47f69"
+  integrity sha512-YYLh0a21GXXpS66ilZbywfXcPTKQQ+bv3tihoqKqSFQP6/F11N7ZmtRbFWcyZXXPFRSzNxmPJBB8ZhP0GkoS0Q==
 
 to-regex-range@^5.0.1:
   version "5.0.1"
