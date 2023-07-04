@@ -7,7 +7,7 @@ async function fetcher(url, postUrl) {
     fetched = await response.json();
     console.log(fetched);
     console.log('fetched now post');
-    let obj = JSON.parse(fetched);
+    let obj = fetched;
     try {
       const res = await fetch(postUrl, {
         method: 'POST',
