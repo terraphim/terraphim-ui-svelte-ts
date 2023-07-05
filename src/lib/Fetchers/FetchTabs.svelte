@@ -2,8 +2,8 @@
   import { Tabs, Tab } from 'svelma';
   import { Button, Field, Icon, Input } from 'svelma';
   let data;
-  let fetchUrl = 'http://localhost:8000/config';
-  let postUrl = 'http://localhost:8000/config';
+  let fetchUrl = 'https://raw.githubusercontent.com/terraphim/terraphim-cloud-fastapi/main/data/ref_arch.json';
+  let postUrl = 'http://localhost:8000/article/';
   // const handleClickUrl = async () => {
   //   data = await fetch(fetchUrl).then(x => x.json());
   // };
