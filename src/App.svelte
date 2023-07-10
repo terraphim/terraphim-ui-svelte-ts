@@ -10,14 +10,23 @@
   import { Route, router, active } from 'tinro';
   import FetchTabs from './lib/Fetchers/FetchTabs.svelte';
   import { initStore } from '@tomic/svelte';
-  import { Store } from '@tomic/lib';
+  import { Store, Agent, properties, importJsonAdString} from '@tomic/lib';
   import { onMount } from 'svelte';
 
-  onMount(() => {
-    // This is where you configure your atomic data store.
-    const store = new Store();
-    initStore(store);
-  })
+  // onMount(() => {
+  //   const secret = prompt('Enter your secret');
+  //   if (!secret) {
+  //     console.log('No secret entered');
+  //     return;
+  //   }
+  //   const agent = Agent.fromSecret(secret);
+  //   // This is where you configure your atomic data store.
+  //   const store = new Store({
+  //     serverUrl: 'http://localhost:9883',
+  //     agent,
+  //   });
+  //   initStore(store);
+  // })
 
 </script>
 

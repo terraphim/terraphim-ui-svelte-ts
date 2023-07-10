@@ -1,6 +1,9 @@
 <script lang="ts">
   import { Tabs, Tab } from 'svelma';
   import { Button, Field, Icon, Input } from 'svelma';
+  import { Select } from 'svelma';
+  import FetchRole from './FetchRole.svelte';
+
   let data;
   let fetchUrl = 'https://raw.githubusercontent.com/terraphim/terraphim-cloud-fastapi/main/data/ref_arch.json';
   let postUrl = 'http://localhost:8000/article/';
@@ -43,13 +46,16 @@
     syncWorker.postMessage(message);
   };
   import { store } from '@tomic/svelte';
-  // import { getResource, getValue } from '@tomic/svelte';
-  // import { urls } from '@tomic/lib';
+  import { getResource, getValue } from '@tomic/svelte';
+  import { urls } from '@tomic/lib';
   
-  const resource = $store.getResourceLoading('http://localhost:9883/config/y3zx5wtm0bq');
-  // const resource1 = getResource('https://atomicdata.dev/documents/tgzamh5hk2t');
-  // const name = getValue<string>(resource1, urls.properties.name);
-  console.log(resource);
+  // const resource = $store.getResourceLoading('http://localhost:9883/config/y3zx5wtm0bq');
+  const resource1 = getResource('http://localhost:9883/config/y3zx5wtm0bq');
+  
+  const name = getValue<string>(resource1, urls.properties.name);
+  const roles = getValue<string[]>(resource1, "http://localhost:9883/property/role");
+  $: console.log("Print name", $name);
+  $: console.log("Print roles", $roles);
 </script>
 
 <Tabs style="is-boxed">
@@ -82,3 +88,11 @@
   <Tab label="JSON-AD">Is good</Tab>
   <Tab label="WikiMedia">lol no</Tab>
 </Tabs>
+
+<Field grouped position="is-right">
+  <Select >
+    {#each $roles??[] as role_value}
+      <FetchRole subject={role_value} />
+    {/each}
+  </Select>
+</Field>
