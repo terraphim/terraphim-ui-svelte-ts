@@ -9,6 +9,16 @@
   import configStore from './lib/ThemeSwitcher.svelte';
   import { Route, router, active } from 'tinro';
   import FetchTabs from './lib/Fetchers/FetchTabs.svelte';
+  import { initStore } from '@tomic/svelte';
+  import { Store } from '@tomic/lib';
+  import { onMount } from 'svelte';
+
+  onMount(() => {
+    // This is where you configure your atomic data store.
+    const store = new Store();
+    initStore(store);
+  })
+
 </script>
 
 <svelte:head>

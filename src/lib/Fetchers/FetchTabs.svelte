@@ -42,6 +42,14 @@
     };
     syncWorker.postMessage(message);
   };
+  import { store } from '@tomic/svelte';
+  // import { getResource, getValue } from '@tomic/svelte';
+  // import { urls } from '@tomic/lib';
+  
+  const resource = $store.getResourceLoading('http://localhost:9883/config/y3zx5wtm0bq');
+  // const resource1 = getResource('https://atomicdata.dev/documents/tgzamh5hk2t');
+  // const name = getValue<string>(resource1, urls.properties.name);
+  console.log(resource);
 </script>
 
 <Tabs style="is-boxed">
