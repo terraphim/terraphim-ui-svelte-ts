@@ -27,7 +27,10 @@
   //   });
   //   initStore(store);
   // })
-
+  let visible = "is-hidden";
+  function toggleVissible() {
+        visible = ""
+    }
 </script>
 
 <svelte:head>
@@ -40,8 +43,8 @@
     href={`/assets/bulmaswatch/${$theme}/bulmaswatch.min.css`}
   />
 </svelte:head>
-
-<main>
+<div class="is-full-height">
+<main class="main-content">
   <ThemeSwitcher />
   <Route path="/">
   <Search />
@@ -54,6 +57,7 @@
       {/each}
     {/if}
   </ul>
+
   <!-- <nav class="navbar ">
 
     <a class="navbar-item " href="/" use:active exact>Home</a>
@@ -62,38 +66,49 @@
   <Route path="/fetch/*"><FetchTabs /></Route>
 </main>
 
-<footer class="footer py-4">
+
+<footer on:mouseover={toggleVissible}>
+  <div class="{visible}">
   <Route path="/">
     
   
-  <nav class="navbar ">
-    <div class="navbar-brand">
-      <a class="navbar-item is-hidden-desktop" href="/">
-        <span class="icon" style="color: #333;">
-          <i class="fas fa-home">
-          </i>
-        </span>
-      </a>
-    <a class="navbar-item" href="/fetch/json">Fetch</a>
-    <a class="navbar-item" href="/contacts">Contacts</a>
-    </div>
-</nav>
+    
+    <nav class="navbar ">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          <span class="icon" style="color: #333;">
+            <i class="fas fa-home">
+            </i>
+          </span>
+        </a>
+      <a class="navbar-item" href="/fetch/json">Fetch</a>
+      <a class="navbar-item" href="/contacts">Contacts</a>
+      </div>
+  </nav>
 
 </Route>
+</div>
 </footer>
+</div>
 <style>
   :root {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
       Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
-
-  main {
-    text-align: center;
-    padding: 1em;
-    margin: 0 auto;
+  .is-full-height {
+    min-height: 100vh;
+    flex-direction: column;
+    display: flex;
+    
   }
-  .py-4 {
-    padding-top: 1rem!important;
-    padding-bottom: 1rem!important;
- }
+  .main-content {
+    flex: 1;
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+  footer {
+  flex-shrink: 0;
+  text-align: center;
+  padding: 1em;
+}
 </style>

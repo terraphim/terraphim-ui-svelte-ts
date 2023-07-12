@@ -126,7 +126,7 @@
 </Field>
 <nav class="navbar ">
   <div class="navbar-brand">
-  <a class="navbar-item is-hidden-desktop" href="/">
+  <a class="navbar-item" href="/">
     <!-- FIXME: replace home icon with terraphim -->
     <span class="icon" style="color: #333;">
       <i class="fas fa-home">
