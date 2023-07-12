@@ -1,15 +1,24 @@
 <script lang="ts">
-  import { Tabs, Tab } from 'svelma';
+  // import { Tabs, Tab } from 'svelma';
+  import {Route} from 'tinro'; 
   import { Button, Field, Icon, Input } from 'svelma';
   import { Select } from 'svelma';
   import FetchRole from './FetchRole.svelte';
-
+  import { Switch } from 'svelma';
+  import {Agent} from '@tomic/lib';
   let data;
+  let isWiki=false;
   let fetchUrl = 'https://raw.githubusercontent.com/terraphim/terraphim-cloud-fastapi/main/data/ref_arch.json';
   let postUrl = 'http://localhost:8000/article/';
-  // const handleClickUrl = async () => {
-  //   data = await fetch(fetchUrl).then(x => x.json());
-  // };
+  let atomicServerUrl='http://localhost:9883/';
+  let agentSecret;
+  const setAtomicServer = async () => {
+    console.log("Updating atomic server configuration");
+    const agent = Agent.fromSecret(agentSecret);
+    $store.setServerUrl(atomicServerUrl);
+    console.log("Server set.Setting agent");
+    $store.setAgent(agent);
+  };
 
   const handleClickUrl = async () => {
     loadWorker();
@@ -41,6 +50,7 @@
       data: {
         url: fetchUrl,
         postUrl: postUrl,
+        isWiki: isWiki,
       },
     };
     syncWorker.postMessage(message);
@@ -57,38 +67,56 @@
   $: console.log("Print name", $name);
   $: console.log("Print roles", $roles);
 </script>
-
-<Tabs style="is-boxed">
-  <Tab label="JSON">
+<div class="box">
+  <!-- <Tab label="Atomic"> -->
+    <Route path="/atomic">
     <Field>
+      <Input
+        bind:value={atomicServerUrl}
+      />
+      </Field>
+      <Field grouped>
+      <Input
+        type="password"
+        placeholder="secret"
+        icon="fas fa-lock"
+        expanded
+        bind:value={agentSecret}
+      />
+      </Field>
+      <Field grouped>
+        <Button type="is-success" class="is-right" iconPack="fa" iconLeft="check" on:click={setAtomicServer} on:submit={setAtomicServer}>Save</Button>
+    </Field>
+  </Route>
+  <!-- <Tab label="JSON"> -->
+    <Route path="/json">
+    <Field grouped>
       <Input
         type="search"
         placeholder="Fetch JSON"
         icon="search"
         bind:value={fetchUrl}
       />
+      </Field>
+      <Field grouped>
       <Input
         type="search"
         placeholder="Post JSON"
         icon="search"
         bind:value={postUrl}
       />
-      <p class="control">
+        <Switch bind:checked={isWiki}>WikiPage</Switch>
+        </Field>
+        <Field grouped>
         <Button
           type="is-primary"
           on:click={handleClickUrl}
           on:submit={handleClickUrl}>Fetch</Button
         >
-      </p>
     </Field>
-    <pre>
-            {JSON.stringify(data, null, 2)}
-          </pre>
-  </Tab>
-  <Tab label="JSON-AD">Is good</Tab>
-  <Tab label="WikiMedia">lol no</Tab>
-</Tabs>
-
+  </Route>
+</div>
+<hr>
 <Field grouped position="is-right">
   <Select >
     {#each $roles??[] as role_value}
@@ -96,3 +124,16 @@
     {/each}
   </Select>
 </Field>
+<nav class="navbar ">
+  <div class="navbar-brand">
+  <a class="navbar-item is-hidden-desktop" href="/">
+    <!-- FIXME: replace home icon with terraphim -->
+    <span class="icon" style="color: #333;">
+      <i class="fas fa-home">
+      </i>
+    </span>
+  </a>
+  <a class="navbar-item" href="/fetch/json">Fetch JSON</a>
+  <a class="navbar-item" href="/fetch/atomic">Set Atomic Server</a>
+</div>
+</nav>

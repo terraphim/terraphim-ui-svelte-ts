@@ -37,14 +37,15 @@
   />
   <link
     rel="stylesheet"
-    href={`./assets/bulmaswatch/${$theme}/bulmaswatch.min.css`}
+    href={`/assets/bulmaswatch/${$theme}/bulmaswatch.min.css`}
   />
 </svelte:head>
 
 <main>
   <ThemeSwitcher />
+  <Route path="/">
   <Search />
-
+</Route>
   <br />
   <ul>
     {#if Array.isArray(configStore)}
@@ -58,9 +59,28 @@
     <a class="navbar-item " href="/" use:active exact>Home</a>
     <a class="navbar-item " href="/fetch" use:active>Fetchers</a>
   </nav> -->
-  <Route path="/fetch"><FetchTabs /></Route>
+  <Route path="/fetch/*"><FetchTabs /></Route>
 </main>
 
+<footer class="footer py-4">
+  <Route path="/">
+    
+  
+  <nav class="navbar ">
+    <div class="navbar-brand">
+      <a class="navbar-item is-hidden-desktop" href="/">
+        <span class="icon" style="color: #333;">
+          <i class="fas fa-home">
+          </i>
+        </span>
+      </a>
+    <a class="navbar-item" href="/fetch/json">Fetch</a>
+    <a class="navbar-item" href="/contacts">Contacts</a>
+    </div>
+</nav>
+
+</Route>
+</footer>
 <style>
   :root {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
@@ -72,4 +92,8 @@
     padding: 1em;
     margin: 0 auto;
   }
+  .py-4 {
+    padding-top: 1rem!important;
+    padding-bottom: 1rem!important;
+ }
 </style>
