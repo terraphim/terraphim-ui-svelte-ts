@@ -64,7 +64,8 @@
                 <i class="fas fa-link" />
               </span>
             </a>
-            <a href="#" class="level-item" aria-label="download/save">
+        
+            <a href="logseq://x-callback-url/quickCapture?title={item.title}&url={item.url}" class="level-item" aria-label="download/save">
               <span class="icon is-medium">
                 <i class="fas fa-download" aria-hidden="true" />
               </span>
@@ -76,7 +77,7 @@
             </a>
             <a href="#" class="level-item" aria-label="like">
               <span class="icon is-medium">
-                <i class="fas fa-bookmark" aria-hidden="true" />
+                <i class="fas fa-bookmark" aria-hidden="true"/>
               </span>
             </a>
           </div>
