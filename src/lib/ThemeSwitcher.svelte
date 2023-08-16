@@ -3,7 +3,8 @@
   import { theme, role, is_tauri, serverUrl } from './stores';
   import { Field, Select } from 'svelma';
   import { CONFIG } from '../config';
-  let configStore =[];
+  import { writable } from 'svelte/store';
+  export let configStore =writable({});
   export function loadConfig() {
     try {
       if (window.__TAURI__) {
@@ -32,10 +33,10 @@
     } catch (error) {
       console.error(error);
     }
-    return configStore;
+    return writable(configStore);
   }
 
-  configStore = loadConfig();
+  configStore=loadConfig();
   console.log('test ', configStore.length);
   console.log('test CONFIG.ServerURL ', CONFIG.ServerURL);
   let themes = '';
